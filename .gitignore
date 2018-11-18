@@ -175,3 +175,9 @@ fabric.properties
 .idea/sonarlint
 
 # End of https://www.gitignore.io/api/macos,magento2,composer,phpstorm
+
+### Docker ###
+/.env
+/data/
+/log/
+/etc/nginx/conf.d/m23learn.localhost.conf
