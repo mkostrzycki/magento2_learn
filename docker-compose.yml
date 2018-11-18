@@ -1,0 +1,92 @@
+version: '3'
+services:
+  web:
+    image: nginx:${NGINX_VERSION}
+    restart: on-failure
+#    volumes:
+#    - "./etc/nginx:/etc/nginx"
+#    - "./log/nginx:/var/log/nginx"
+##    - "./etc/ssl:/etc/ssl"
+#    - "m2-rsync-sync:/var/www/html:nocopy"
+#    ports:
+#    - "80:80"
+##    - "443:443"
+    depends_on:
+    - php
+    - mysqldb
+  php:
+    image: bitnami/php-fpm:${PHP_VERSION}
+    restart: on-failure
+#    volumes:
+#    - "./etc/php/conf.d/php.ini:/opt/bitnami/php/etc/conf.d/custom.ini"
+#    - "./etc/php/php-fpm.conf:/opt/bitnami/php/etc/php-fpm.conf"
+#    - "./etc/php/php-fpm.d:/opt/bitnami/php/etc/php-fpm.d"
+#    - "m2-rsync-sync:/var/www/html:nocopy"
+#  composer:
+#    image: composer:${COMPOSER_VERSION}
+#    volumes:
+#    - "./app:/app"
+#    command: update --ignore-platform-reqs --no-scripts
+#    depends_on:
+#    - php
+  mysqldb:
+    image: mysql:${MYSQL_VERSION}
+    restart: on-failure
+    environment:
+    - MYSQL_DATABASE=${MYSQL_DATABASE}
+    - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    - MYSQL_USER=${MYSQL_USER}
+    - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+#    ports:
+#    - "20101:3306"
+#    volumes:
+#    - "./etc/mysql:/etc/mysql"
+#    - "./log/mysql:/var/log/mysql"
+#    - "./data/mysql:/var/lib/mysql"
+
+#  solr:
+#    image: solr:${SOLR_VERSION}
+#    restart: on-failure
+#    volumes:
+#    - "./etc/solr:/opt/solr/server/solr"
+#    - "./data/solr:/opt/solr/server/solr/mycores"
+#    ports:
+#    - "20002:8983"
+#  rabbitmq:
+#    image: rabbitmq:${RABBITMQ_VERSION}
+#    restart: on-failure
+#    environment:
+#    - RABBITMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE}
+#    - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+#    - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+#    - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_DEFAULT_VHOST}
+#    volumes:
+#    - "./etc/rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins"
+#    ports:
+#    - "20003:15672"
+#    - "20004:5672"
+#  redis:
+#    image: redis:${REDIS_VERSION}
+#    restart: on-failure
+#    environment:
+#    # ALLOW_EMPTY_PASSWORD is recommended only for development.
+#    - ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}
+#    - REDIS_DISABLE_COMMANDS=${REDIS_DISABLE_COMMANDS}
+#    labels:
+#      kompose.service.type: nodeport
+#    ports:
+#    - '20005:6379'
+#    volumes:
+#    - './data/redis:/var/lib/redis'
+#  varnish:
+#    image: million12/varnish:${VARNISH_VERSION}
+#    environment:
+#    - VCL_CONFIG=${VCL_CONFIG}
+#    - CACHE_SIZE=${CACHE_SIZE}
+#    - VARNISHD_PARAMS=${VARNISHD_PARAMS}
+#    depends_on:
+#    - web
+
+#volumes:
+#  m2-rsync-sync:
+#    external: true
