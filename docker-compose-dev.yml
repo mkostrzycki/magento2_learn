@@ -1,13 +1,13 @@
-version: '3'
+version: '2'
 services:
   web:
     image: nginx:${NGINX_VERSION}
     restart: on-failure
     volumes:
-    - "./etc/nginx:/etc/nginx"
-    - "./log/nginx:/var/log/nginx"
-#    - "./etc/ssl:/etc/ssl"
-    - "m2-rsync-sync:/var/www/html:nocopy"
+    - ./etc/nginx:/etc/nginx
+    - ./log/nginx:/var/log/nginx
+#    - ./etc/ssl:/etc/ssl
+    - m2-rsync-sync:/var/www/html:nocopy
     ports:
     - "80:80"
 #    - "443:443"
@@ -18,15 +18,15 @@ services:
     image: bitnami/php-fpm:${PHP_VERSION}
     restart: on-failure
     volumes:
-    - "./etc/php:/opt/bitnami/php/etc"
-#    - "./etc/php/conf.d/php.ini:/opt/bitnami/php/etc/conf.d/custom.ini"
-#    - "./etc/php/php-fpm.conf:/opt/bitnami/php/etc/php-fpm.conf"
-#    - "./etc/php/php-fpm.d:/opt/bitnami/php/etc/php-fpm.d"
-    - "m2-rsync-sync:/var/www/html:nocopy"
+    - ./etc/php:/opt/bitnami/php/etc
+#    - ./etc/php/conf.d/php.ini:/opt/bitnami/php/etc/conf.d/custom.ini
+#    - ./etc/php/php-fpm.conf:/opt/bitnami/php/etc/php-fpm.conf
+#    - ./etc/php/php-fpm.d:/opt/bitnami/php/etc/php-fpm.d
+    - m2-rsync-sync:/var/www/html:nocopy
 #  composer:
 #    image: composer:${COMPOSER_VERSION}
 #    volumes:
-#    - "./app:/app"
+#    - ./app:/app
 #    command: update --ignore-platform-reqs --no-scripts
 #    depends_on:
 #    - php
@@ -41,9 +41,9 @@ services:
     ports:
     - "20101:3306"
     volumes:
-    - "./etc/mysql:/etc/mysql"
-    - "./log/mysql:/var/log/mysql"
-    - "./data/mysql:/var/lib/mysql"
+    - ./etc/mysql:/etc/mysql
+    - ./log/mysql:/var/log/mysql
+    - ./data/mysql:/var/lib/mysql
 
 #  solr:
 #    image: solr:${SOLR_VERSION}
